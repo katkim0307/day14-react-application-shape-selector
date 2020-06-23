@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import Shape from './Shape';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// STATEFUL CLASS COMPONENT
+class Selector extends Component {
+  constructor() {
+    super();
+    this.state={
+      selectedShape: 'Select the shape',
+    }
+  }
 
-export default App;
+  selectShape = (shape) => {
+    this.setState({
+      selectedShape: shape,
+    })
+  };
+
+
+  render() {
+    return (
+      // MUST HAVE ONLY ONE PARENT DIV!!!
+      // Parent div with navbar & shape-list children divs
+      <div className='container'>
+        <div className='navbar'>
+          <div>Selected: </div>
+          <div>{this.state.selectedShape}</div>
+        </div>
+        <div className='shape-list'>
+          <Shape shape="square" selectShape={this.selectShape}/>
+          <Shape shape="circle" selectShape={this.selectShape}/>
+          <Shape shape="triangle" selectShape={this.selectShape}/>
+        </div>
+      </div>
+    );
+  };
+};
+
+export default Selector;
